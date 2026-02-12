@@ -1,249 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>For Azhagii ❤️</title>
+<title>Valentine</title>
 
 <style>
-
-body{
-margin:0;
-font-family:Arial;
-background:black;
-color:white;
-text-align:center;
-overflow-x:hidden;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #ffc0cb;
+    text-align: center;
+    overflow-x: hidden;
 }
 
-/* FLOATING HEARTS */
+.screen { display: none; padding: 40px 20px; }
+.active { display: block; }
 
-.heart{
-position:fixed;
-bottom:-20px;
-animation:floatUp 8s linear infinite;
-font-size:20px;
+h1 { font-size: 2.8rem; margin-top: 35vh; }
+
+button {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    margin-top: 30px;
 }
 
-@keyframes floatUp{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-100vh);opacity:0;}
+.heart {
+    position: fixed;
+    font-size: 20px;
+    animation: float 6s linear forwards;
 }
 
-/* PAGES */
-
-.page{
-display:none;
-padding:20px;
+@keyframes float {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-700px); opacity: 0; }
 }
 
-.active{
-display:block;
+/* Cupid */
+#cupid {
+    font-size: 40px;
+    margin-top: 20px;
+    animation: fly 2s infinite alternate;
 }
 
-/* BUTTON */
-
-button{
-padding:12px 20px;
-border-radius:20px;
-border:none;
-background:pink;
-font-size:18px;
+@keyframes fly {
+    from { transform: translateX(-20px); }
+    to { transform: translateX(20px); }
 }
 
-/* MEMORY GRID */
-
-.memory-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
-margin-bottom:10px;
+.gallery img {
+    width: 90px;
+    border-radius: 15px;
+    margin: 10px;
 }
 
-.bottom-row{
-grid-template-columns:repeat(3,1fr);
+/* Romantic popup */
+.overlay {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.6);
 }
-
-.memory-grid img{
-width:100%;
-border-radius:15px;
-cursor:pointer;
+.popup {
+    display:none;
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    background:#fff0f5;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 0 20px pink;
 }
-
-/* POPUP ROMANTIC UPGRADE */
-
-.popup-bg{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-backdrop-filter:blur(8px);
-display:none;
-justify-content:center;
-align-items:center;
-}
-
-.popup{
-background:#111;
-padding:25px;
-border-radius:20px;
-max-width:90%;
-max-height:80vh;
-overflow-y:auto;
-box-shadow:0 0 25px pink;
-}
-
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
-<source src="Poove.mp3" type="audio/mpeg">
-</audio>
-
-<!-- PAGE 1 -->
-
-<div id="page1" class="page active">
-<h1>Buon San Valentino baby ❤️</h1>
-<button onclick="startSite()">Continue</button>
-<br><br>
-<div>🏹 Cupid 🏹</div>
+<!-- Screen 1 -->
+<div class="screen active" id="s1">
+    <h1>Buon San Valentino, baby ❤️</h1>
+    <button onclick="start()">Continue 💌</button>
+    <div id="cupid">🏹💘</div>
 </div>
 
-<!-- PAGE 2 QUIZ -->
-
-<div id="page2" class="page">
-
-<h2>What's my favourite thing about you?</h2>
-
-<button onclick="correct()">Your smile</button><br><br>
-<button onclick="correct()">Your talent</button><br><br>
-<button onclick="correct()">Your patience</button><br><br>
-<button onclick="correct()">Your anger 😅</button>
-
+<!-- Screen 2 -->
+<div class="screen" id="s2">
+    <h1>What’s my favourite thing about you?</h1>
+    <button onclick="quiz()">Your smile 😊</button>
+    <button onclick="quiz()">Your talent ✨</button>
+    <button onclick="quiz()">Your patience 💗</button>
+    <button onclick="quiz()">Your anger 😤❤️</button>
 </div>
 
-<!-- PAGE 3 VALENTINES WEEK -->
-
-<div id="page3" class="page">
-
-<h1>Valentines Week</h1>
-
-<div class="memory-grid">
-<img src="photo1.jpg" onclick="openMemory(1)">
-<img src="photo2.jpg" onclick="openMemory(2)">
-<img src="photo3.jpg" onclick="openMemory(3)">
-<img src="photo4.jpg" onclick="openMemory(4)">
+<!-- Screen 3 -->
+<div class="screen" id="s3">
+    <h1>Our Memories 💕</h1>
+    <div class="gallery">
+        <img src="photo1.jpg" onclick="note('You make my life brighter 💖')">
+        <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')">
+        <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')">
+    </div>
+    <button onclick="next(4)">Next 💘</button>
 </div>
 
-<div class="memory-grid bottom-row">
-<img src="photo5.jpg" onclick="openMemory(5)">
-<img src="photo6.jpg" onclick="openMemory(6)">
-<img src="photo7.jpg" onclick="openMemory(7)">
+<!-- Screen 4 -->
+<div class="screen" id="s4">
+    <h1>Will you be my Valentine? 💘</h1>
+    <button onclick="yes()">YES ❤️</button>
+    <button id="noBtn">NO 🙅‍♀️</button>
 </div>
 
+<!-- Screen 5 -->
+<div class="screen" id="s5">
+    <h1>Perfect 💖</h1>
+    <p>No matter the distance, you're my home ❤️</p>
 </div>
 
-<!-- PAGE 4 VALENTINE QUESTION -->
-
-<div id="page4" class="page">
-
-<h2>Will you be my Valentine forever?</h2>
-
-<button onclick="yesLove()">YES ❤️</button>
-<button id="noBtn" onmouseover="moveNo()">NO</button>
-
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+    <p id="popupText"></p>
+    <button onclick="closePop()">Close</button>
 </div>
 
-<!-- FINAL PAGE -->
-
-<div id="page5" class="page">
-
-<h2>No matter the distance, you're my home ❤️</h2>
-
-</div>
-
-<!-- POPUP -->
-
-<div id="popupBg" class="popup-bg">
-<div class="popup" id="popupText"></div>
-</div>
+<audio id="music" src="Poove.mp3" loop></audio>
 
 <script>
+const music = document.getElementById("music");
+let noCount = 0;
 
-/* HEARTS */
-
+// Hearts everywhere
 setInterval(()=>{
-let heart=document.createElement("div");
-heart.className="heart";
-heart.style.left=Math.random()*100+"%";
-heart.innerHTML="❤️";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),8000);
-},600);
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="100vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},500);
 
-
-/* NAVIGATION */
-
-function startSite(){
-document.getElementById("music").play();
-showPage(2);
+function start(){
+    music.play().catch(()=>{});
+    next(2);
 }
 
-function showPage(n){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-document.getElementById("page"+n).classList.add("active");
+function next(n){
+    document.querySelector('.active').classList.remove('active');
+    document.getElementById('s'+n).classList.add('active');
 }
 
-function correct(){
-alert("All answers are correct because I love everything about you ❤️");
-showPage(3);
+function quiz(){
+    explode("✨");
+    note("Everything about you is my favourite 💖");
+    setTimeout(()=>next(3),1200);
 }
 
-/* MEMORY TEXTS — ADD YOUR ROMANTIC NOTES HERE */
-
-const memories={
-1:"ADD YOUR TEXT HERE ❤️",
-2:"ADD YOUR TEXT HERE ❤️",
-3:"ADD YOUR TEXT HERE ❤️",
-4:"ADD YOUR TEXT HERE ❤️",
-5:"ADD YOUR TEXT HERE ❤️",
-6:"ADD YOUR TEXT HERE ❤️",
-7:"ADD YOUR TEXT HERE ❤️"
-};
-
-function openMemory(id){
-document.getElementById("popupText").innerText=memories[id];
-document.getElementById("popupBg").style.display="flex";
+function note(text){
+    document.getElementById("popupText").innerHTML=text;
+    document.getElementById("overlay").style.display="block";
+    document.getElementById("popup").style.display="block";
 }
 
-document.getElementById("popupBg").onclick=()=>{
-document.getElementById("popupBg").style.display="none";
+function closePop(){
+    document.getElementById("overlay").style.display="none";
+    document.getElementById("popup").style.display="none";
 }
 
-/* RUNNING NO BUTTON */
-
-let noClicks=0;
-
-function moveNo(){
-let btn=document.getElementById("noBtn");
-btn.style.position="absolute";
-btn.style.top=Math.random()*80+"%";
-btn.style.left=Math.random()*80+"%";
-noClicks++;
-if(noClicks>=10){
-window.open("photo4.jpg");
-}
+function explode(sym){
+    for(let i=0;i<15;i++){
+        let s=document.createElement("div");
+        s.className="heart";
+        s.innerHTML=sym;
+        s.style.left=Math.random()*100+"vw";
+        s.style.top="60vh";
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),1000);
+    }
 }
 
-function yesLove(){
-alert("Ti amo ❤️");
-showPage(5);
-}
+document.getElementById("noBtn").addEventListener("touchstart",()=>{
+    noCount++;
+    if(noCount>=10){
+        note("<img src='photo4.jpg' style='width:100%;border-radius:15px'>");
+        return;
+    }
+    let b=document.getElementById("noBtn");
+    b.style.position="absolute";
+    b.style.left=Math.random()*70+"vw";
+    b.style.top=Math.random()*70+"vh";
+});
 
+function yes(){
+    explode("❤️");
+    setTimeout(()=>next(5),1200);
+}
 </script>
 
 </body>
