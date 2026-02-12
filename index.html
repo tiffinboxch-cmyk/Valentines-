@@ -71,8 +71,9 @@ button {
 }
 
 .popup {
-    display:none;
-    position:fixed;
+    display: none;          /* keep hidden on load */
+    visibility: hidden;     /* prevent flash on page load */
+    position: fixed;
     top:50%; 
     left:50%;
     transform:translate(-50%,-50%);
@@ -99,6 +100,12 @@ button {
 @keyframes fadeIn {
     from { opacity: 0; transform: translate(-50%, -55%) scale(0.95); }
     to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* fade-out keyframes for closing popup */
+@keyframes fadeOut {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    to   { opacity: 0; transform: translate(-50%, -55%) scale(0.95); }
 }
 
 /* sparkle effect */
@@ -206,14 +213,17 @@ function note(text){
     
     document.getElementById("overlay").style.display = "block";
     popup.style.display = "flex";
+    popup.style.visibility = "visible";
     
     // reset fade animation
     popup.style.animation = "fadeIn 0.7s forwards";
 }
 
 function closePop(){
+    const popup = document.getElementById("popup");
+    popup.style.animation = "fadeOut 0.5s forwards";
     document.getElementById("overlay").style.display="none";
-    document.getElementById("popup").style.display="none";
+    setTimeout(()=>{ popup.style.display="none"; popup.style.visibility="hidden"; }, 500);
 }
 
 function explode(sym){
