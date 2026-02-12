@@ -52,6 +52,7 @@ button {
     to { transform: translateX(20px); }
 }
 
+/* Memory gallery images */
 .gallery img {
     width: 90px;
     border-radius: 15px;
@@ -65,16 +66,45 @@ button {
     top:0; left:0;
     width:100%; height:100%;
     background:rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    z-index: 999;
 }
+
 .popup {
     display:none;
     position:fixed;
-    top:50%; left:50%;
+    top:50%; 
+    left:50%;
     transform:translate(-50%,-50%);
     background:#fff0f5;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 0 20px pink;
+    padding:20px;
+    border-radius:25px;
+    box-shadow: 0 0 30px pink;
+    max-width:90%;
+    max-height:80vh;
+    overflow-y:auto;
+    text-align:center;
+    z-index:1000;
+
+    /* fade-in */
+    opacity: 0;
+    animation: fadeIn 0.7s forwards;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* fade-in keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, -55%) scale(0.95); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* sparkle effect */
+@keyframes sparkle {
+    0%, 100% { text-shadow: 0 0 2px pink; }
+    50% { text-shadow: 0 0 12px #ff69b4, 0 0 15px #ffb6c1; }
 }
 </style>
 </head>
@@ -97,50 +127,22 @@ button {
     <button onclick="quiz()">Your anger 😤❤️</button>
 </div>
 
-<!-- Screen 3 -->
+<!-- Screen 3: Valentines Week -->
 <div class="screen" id="s3">
     <h1>Valentines Week 💕</h1>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(4,1fr); gap:10px; justify-items:center;">
-        <img src="photo1.jpg" onclick="note('You make my life brighter 💖')" style="width:90px; border-radius:15px;">
-        <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')" style="width:90px; border-radius:15px;">
-        <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')" style="width:90px; border-radius:15px;">
-        <img src="photo4.jpg" onclick="note('You are my sunshine ☀️')" style="width:90px; border-radius:15px;">
+        <img src="photo1.jpg" onclick="note('You make my life brighter 💖')">
+        <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')">
+        <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')">
+        <img src="photo4.jpg" onclick="note('You are my sunshine ☀️')">
     </div>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; justify-items:center; margin-top:10px;">
-        <img src="photo5.jpg" onclick="note('Every moment with you is magic 💞')" style="width:90px; border-radius:15px;">
-        <img src="photo6.jpg" onclick="note('Your laughter is my favorite melody 🎶')" style="width:90px; border-radius:15px;">
-        <img src="photo7.jpg" onclick="note('My heart belongs to you forever ❤️')" style="width:90px; border-radius:15px;">
+        <img src="photo5.jpg" onclick="note('Every moment with you is magic 💞')">
+        <img src="photo6.jpg" onclick="note('Your laughter is my favorite melody 🎶')">
+        <img src="photo7.jpg" onclick="note('My heart belongs to you forever ❤️')">
     </div>
     <button onclick="next(4)">Next 💘</button>
 </div>
-
-<!-- Popup Glow + Blur (replace existing overlay & popup style ONLY) -->
-<style>
-.overlay {
-    display:none;
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
-    z-index:999;
-}
-.popup {
-    display:none;
-    position:fixed;
-    top:50%; left:50%;
-    transform:translate(-50%,-50%);
-    background:#fff0f5;
-    padding:20px;
-    border-radius:25px;
-    box-shadow: 0 0 30px pink;
-    max-width:90%;
-    max-height:80vh;
-    overflow-y:auto;
-    text-align:center;
-    z-index:1000;
-}
-</style>
 
 <!-- Screen 4 -->
 <div class="screen" id="s4">
@@ -195,9 +197,18 @@ function quiz(){
 }
 
 function note(text){
-    document.getElementById("popupText").innerHTML=text;
-    document.getElementById("overlay").style.display="block";
-    document.getElementById("popup").style.display="block";
+    const popup = document.getElementById("popup");
+    const popupText = document.getElementById("popupText");
+    popupText.innerHTML = text;
+    
+    // sparkle effect
+    popupText.style.animation = "sparkle 1s infinite";
+    
+    document.getElementById("overlay").style.display = "block";
+    popup.style.display = "flex";
+    
+    // reset fade animation
+    popup.style.animation = "fadeIn 0.7s forwards";
 }
 
 function closePop(){
