@@ -56,10 +56,22 @@ button {
 }
 
 /* Memory gallery images */
+.gallery {
+    text-align: center;
+}
+
 .gallery img {
     width: 90px;
     border-radius: 15px;
     margin: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.caption {
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 /* Romantic popup */
@@ -111,6 +123,18 @@ button {
     0%, 100% { text-shadow: 0 0 2px pink; }
     50% { text-shadow: 0 0 12px #ff69b4, 0 0 15px #ffb6c1; }
 }
+
+/* Hearts shot by cupids */
+.cupidHeart {
+    position: absolute;
+    font-size: 16px;
+    animation: cupidHeartMove 2s linear forwards;
+}
+
+@keyframes cupidHeartMove {
+    from { transform: translateY(0) scale(1); opacity: 1; }
+    to   { transform: translateY(-150px) scale(0.7); opacity: 0; }
+}
 </style>
 </head>
 
@@ -136,15 +160,36 @@ button {
 <div class="screen" id="s3">
     <h1>Valentines Week 💕</h1>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(4,1fr); gap:10px; justify-items:center;">
-        <img src="photo1.jpg" onclick="note('You make my life brighter 💖')">
-        <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')">
-        <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')">
-        <img src="photo4.jpg" onclick="note('You are my sunshine ☀️')">
+        <div>
+            <img src="photo1.jpg" onclick="note('As long as we are together and even after I am gone you will always have a rose from me my queen 😁❤️')">
+            <div class="caption">Happy rose day 🌹</div>
+        </div>
+        <div>
+            <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')">
+            <div class="caption">Happy propose day 💍</div>
+        </div>
+        <div>
+            <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')">
+            <div class="caption">Happy chocolate day 🍫</div>
+        </div>
+        <div>
+            <img src="photo4.jpg" onclick="note('You are my sunshine ☀️')">
+            <div class="caption">Happy teddy day 🧸</div>
+        </div>
     </div>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; justify-items:center; margin-top:10px;">
-        <img src="photo5.jpg" onclick="note('Every moment with you is magic 💞')">
-        <img src="photo6.jpg" onclick="note('Your laughter is my favorite melody 🎶')">
-        <img src="photo7.jpg" onclick="note('My heart belongs to you forever ❤️')">
+        <div>
+            <img src="photo5.jpg" onclick="note('Every moment with you is magic 💞')">
+            <div class="caption">Happy promise day ✋️😌</div>
+        </div>
+        <div>
+            <img src="photo6.jpg" onclick="note('Your laughter is my favorite melody 🎶')">
+            <div class="caption">Happy hug day 🤗</div>
+        </div>
+        <div>
+            <img src="photo7.jpg" onclick="note('My heart belongs to you forever ❤️')">
+            <div class="caption">Happy kiss day 💋</div>
+        </div>
     </div>
     <button onclick="next(4)">Next 💘</button>
 </div>
@@ -196,6 +241,17 @@ window.addEventListener("load", () => {
         c.style.top=(50+Math.random()*30)+"vh";
         c.style.animationDuration = (4 + Math.random()*3) + "s";
         s1.appendChild(c);
+        
+        // Shoot hearts periodically
+        setInterval(()=>{
+            let heart = document.createElement("div");
+            heart.className="cupidHeart";
+            heart.innerHTML="💖";
+            heart.style.left = c.offsetLeft + 10 + "px";
+            heart.style.top = c.offsetTop + 10 + "px";
+            s1.appendChild(heart);
+            setTimeout(()=>heart.remove(),2000);
+        },1500 + Math.random()*1500);
     }
 });
 
@@ -227,7 +283,6 @@ function note(text){
     popup.style.display = "flex";
     popup.style.visibility = "visible";
     
-    // reset fade animation
     popup.style.animation = "fadeIn 0.7s forwards";
 }
 
