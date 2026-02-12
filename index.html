@@ -111,18 +111,6 @@ button {
     0%, 100% { text-shadow: 0 0 2px pink; }
     50% { text-shadow: 0 0 12px #ff69b4, 0 0 15px #ffb6c1; }
 }
-
-/* Hearts shot by cupids */
-.cupidHeart {
-    position: absolute;
-    font-size: 16px;
-    animation: cupidHeartMove 2s linear forwards;
-}
-
-@keyframes cupidHeartMove {
-    from { transform: translateY(0) scale(1); opacity: 1; }
-    to   { transform: translateY(-150px) scale(0.7); opacity: 0; }
-}
 </style>
 </head>
 
@@ -208,17 +196,6 @@ window.addEventListener("load", () => {
         c.style.top=(50+Math.random()*30)+"vh";
         c.style.animationDuration = (4 + Math.random()*3) + "s";
         s1.appendChild(c);
-        
-        // Shoot hearts periodically
-        setInterval(()=>{
-            let heart = document.createElement("div");
-            heart.className="cupidHeart";
-            heart.innerHTML="💖";
-            heart.style.left = c.offsetLeft + 10 + "px";
-            heart.style.top = c.offsetTop + 10 + "px";
-            s1.appendChild(heart);
-            setTimeout(()=>heart.remove(),2000);
-        },1500 + Math.random()*1500);
     }
 });
 
@@ -250,6 +227,7 @@ function note(text){
     popup.style.display = "flex";
     popup.style.visibility = "visible";
     
+    // reset fade animation
     popup.style.animation = "fadeIn 0.7s forwards";
 }
 
