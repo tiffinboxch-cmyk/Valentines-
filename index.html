@@ -99,14 +99,48 @@ button {
 
 <!-- Screen 3 -->
 <div class="screen" id="s3">
-    <h1>Our Memories 💕</h1>
-    <div class="gallery">
-        <img src="photo1.jpg" onclick="note('You make my life brighter 💖')">
-        <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')">
-        <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')">
+    <h1>Valentines Week 💕</h1>
+    <div class="gallery" style="display:grid; grid-template-columns: repeat(4,1fr); gap:10px; justify-items:center;">
+        <img src="photo1.jpg" onclick="note('You make my life brighter 💖')" style="width:90px; border-radius:15px;">
+        <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')" style="width:90px; border-radius:15px;">
+        <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')" style="width:90px; border-radius:15px;">
+        <img src="photo4.jpg" onclick="note('You are my sunshine ☀️')" style="width:90px; border-radius:15px;">
+    </div>
+    <div class="gallery" style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; justify-items:center; margin-top:10px;">
+        <img src="photo5.jpg" onclick="note('Every moment with you is magic 💞')" style="width:90px; border-radius:15px;">
+        <img src="photo6.jpg" onclick="note('Your laughter is my favorite melody 🎶')" style="width:90px; border-radius:15px;">
+        <img src="photo7.jpg" onclick="note('My heart belongs to you forever ❤️')" style="width:90px; border-radius:15px;">
     </div>
     <button onclick="next(4)">Next 💘</button>
 </div>
+
+<!-- Popup Glow + Blur (replace existing overlay & popup style ONLY) -->
+<style>
+.overlay {
+    display:none;
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    z-index:999;
+}
+.popup {
+    display:none;
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    background:#fff0f5;
+    padding:20px;
+    border-radius:25px;
+    box-shadow: 0 0 30px pink;
+    max-width:90%;
+    max-height:80vh;
+    overflow-y:auto;
+    text-align:center;
+    z-index:1000;
+}
+</style>
 
 <!-- Screen 4 -->
 <div class="screen" id="s4">
