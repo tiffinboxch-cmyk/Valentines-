@@ -283,8 +283,11 @@ setInterval(()=>{
 function checkPwd(){
     const input = document.getElementById("pwdInput").value.trim();
     if(input.toLowerCase() === "azhagi"){
+        // Remove the password screen
         document.getElementById('s0').classList.remove('active');
-        next(1);
+        // Directly activate screen 1
+        document.getElementById('s1').classList.add('active');
+        // Start music
         music.play().catch(()=>{});
     } else {
         alert("Incorrect! Try again 💔");
