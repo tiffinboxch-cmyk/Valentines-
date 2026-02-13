@@ -48,8 +48,6 @@ button {
 }
 
 .cupid:nth-child(1) { animation-delay: 0s; }
-.cupid:nth-child(2) { animation-delay: 0.5s; }
-.cupid:nth-child(3) { animation-delay: 1s; }
 
 @keyframes fly {
     from { transform: translateX(-20px); }
@@ -175,8 +173,6 @@ button {
     <h1>Buon San Valentino, baby ❤️</h1>
     <button onclick="start()">Continue 💌</button>
     <div class="cupid">👶🏹❤️</div>
-    <div class="cupid">👶🏹❤️</div>
-    <div class="cupid">👶🏹❤️</div>
 </div>
 
 <!-- Screen 2 -->
@@ -193,33 +189,33 @@ button {
     <h1>Valentines Week 💕</h1>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(4,1fr); gap:10px; justify-items:center;">
         <div>
-            <img src="photo1.jpg" onclick="note('You make my life brighter 💖')">
+            <img src="photo1.jpg" onclick="note('As long as you are with me and even after i am gone You will always have a rose from me because you deserve it, My Queen 💖')">
             <div class="caption">Happy rose day 🌹</div>
         </div>
         <div>
-            <img src="photo2.jpg" onclick="note('My comfort, my happiness ❤️')">
+            <img src="photo2.jpg" onclick="note('And then suddenly, all the songs reminded me of you. Indha photo le vara madiri i will always kneel down to you if it means i get to hold your hand ❤️ ')">
             <div class="caption">Happy propose day 💍</div>
         </div>
         <div>
-            <img src="photo3.jpg" onclick="note('Forever grateful for you ✨')">
+            <img src="photo3.jpg" onclick="note('I wish our life together will be as sweet as this chocolate, giving us comfort whenever we need it ✨')">
             <div class="caption">Happy chocolate day 🍫</div>
         </div>
         <div>
-            <img src="photo4.jpg" onclick="note('You are my sunshine ☀️')">
+            <img src="photo4.jpg" onclick="note('Perks of having me as a boyfriend: Youll always have a big squishy teddy bear to cuddle up with and sleep for the rest of your life, No extra cost 😁')">
             <div class="caption">Happy teddy day 🧸</div>
         </div>
     </div>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(3,1fr); gap:10px; justify-items:center; margin-top:10px;">
         <div>
-            <img src="photo5.jpg" onclick="note('Every moment with you is magic 💞')">
+            <img src="photo5.jpg" onclick="note('Idhuku dhane nee kochikite aniku 😏 I promise that i will love you through the highest of highs and the lowest of lows. I promise that i will die for you and more than that i will live for you and for us and for our family. I promise that i will stand by you no matter what and be your biggest supporter in this world. I promise i will choose you every single day for the rest of my life whatever life throws at us. I promise to learn from my mistakes and making sure i be the best possible man for you. I promise Ill give you the happiest life if you choose to stay with me and treat you like the Queen you deserve to be. I promise you the world Azhagii  💞')">
             <div class="caption">Happy promise day ✋️😌</div>
         </div>
         <div>
-            <img src="photo6.jpg" onclick="note('Your laughter is my favorite melody 🎶')">
+            <img src="photo6.jpg" onclick="note('You will always have a shoulder to cry on and someone to hold you tightly when things go south😁')">
             <div class="caption">Happy hug day 🤗</div>
         </div>
         <div>
-            <img src="photo7.jpg" onclick="note('My heart belongs to you forever ❤️')">
+            <img src="photo7.jpg" onclick="note('And last youll always have a kiss from me, not just on your lips. On your hands for you sre my lady, on your cheeks for you are my mother and on your forehead, for you are my baby 😘')">
             <div class="caption">Happy kiss day 💋</div>
         </div>
     </div>
@@ -230,13 +226,14 @@ button {
 <div class="screen" id="s4">
     <h1>Will you be my Valentine? 💘</h1>
     <button onclick="yes()">YES ❤️</button>
-    <button id="noBtn">NO 🙅‍♀️</button>
+    <button id="noBtn">NO 🩴</button>
 </div>
 
 <!-- Screen 5 -->
 <div class="screen" id="s5">
-    <h1>Perfect 💖</h1>
-    <p>No matter the distance, you're my home ❤️</p>
+    <h1>You are the bane of my existence and the object of all my desires
+I Love you Kanmani</h1>
+    <p>No matter the distance, you'll always be my HOME ❤️</p>
     <div style="font-size:100px;">❤️</div>
 </div>
 
@@ -342,6 +339,8 @@ function yes(){
     // Big heart fade in
     const bh = document.getElementById("bigHeart");
     bh.style.opacity = 1;
+    // Show popup with photo8.jpg
+    note("<img src='photo8.jpg' style='width:90%; border-radius:15px;'>");
     setTimeout(()=>next(5),2500);
 }
 </script>
