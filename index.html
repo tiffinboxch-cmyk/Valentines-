@@ -131,10 +131,39 @@ button {
     animation: cupidHeartMove 2s linear forwards;
 }
 
-@keyframes cupidHeartMove {
-    from { transform: translateY(0) scale(1); opacity: 1; }
-    to   { transform: translateY(-150px) scale(0.7); opacity: 0; }
+/* Grand explosion hearts/stars */
+.explosion {
+    position: absolute;
+    font-size: 20px;
+    animation: explodeAnim 2s ease-out forwards;
 }
+
+@keyframes explodeAnim {
+    0% { transform: translate(0,0) scale(0.5); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)) scale(1.5); opacity: 0; }
+}
+
+/* Final big heart */
+#bigHeart {
+    position: fixed;
+    font-size: 100px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    opacity:0;
+    animation: bigHeartFade 2s forwards;
+    z-index: 2000;
+}
+
+@keyframes bigHeartFade {
+    0% { opacity:0; transform:translate(-50%,-50%) scale(0.5); }
+    50% { opacity:1; transform:translate(-50%,-50%) scale(1.2); }
+    100% { opacity:1; transform:translate(-50%,-50%) scale(1); }
+}
+
+/* Final screen font */
+#s5 h1 { font-size: 4rem; font-weight:bold; margin-top:25vh; }
+#s5 p { font-size: 2.5rem; font-weight:bold; }
 </style>
 </head>
 
@@ -161,7 +190,7 @@ button {
     <h1>Valentines Week 💕</h1>
     <div class="gallery" style="display:grid; grid-template-columns: repeat(4,1fr); gap:10px; justify-items:center;">
         <div>
-            <img src="photo1.jpg" onclick="note('As long as we are together and even after I am gone you will always have a rose from me my queen 😁❤️')">
+            <img src="photo1.jpg" onclick="note('You make my life brighter 💖')">
             <div class="caption">Happy rose day 🌹</div>
         </div>
         <div>
@@ -205,6 +234,7 @@ button {
 <div class="screen" id="s5">
     <h1>Perfect 💖</h1>
     <p>No matter the distance, you're my home ❤️</p>
+    <div style="font-size:100px;">❤️</div>
 </div>
 
 <div class="overlay" id="overlay"></div>
@@ -212,6 +242,8 @@ button {
     <p id="popupText"></p>
     <button onclick="closePop()">Close</button>
 </div>
+
+<div id="bigHeart">❤️</div>
 
 <audio id="music" src="Poove.mp3" loop></audio>
 
@@ -294,21 +326,21 @@ function closePop(){
 }
 
 function explode(sym){
-    for(let i=0;i<15;i++){
+    for(let i=0;i<25;i++){
         let s=document.createElement("div");
         s.className="heart";
         s.innerHTML=sym;
         s.style.left=Math.random()*100+"vw";
         s.style.top="60vh";
         document.body.appendChild(s);
-        setTimeout(()=>s.remove(),1000);
+        setTimeout(()=>s.remove(),1500);
     }
 }
 
 document.getElementById("noBtn").addEventListener("touchstart",()=>{
     noCount++;
     if(noCount>=10){
-        note("<img src='photo4.jpg' style='width:100%;border-radius:15px'>");
+        note("<b>Avloodhan unakku mariyadhai🖕Seruppala adipen naaye 🩴Mariyadhaiya yes sollu 😤</b>");
         return;
     }
     let b=document.getElementById("noBtn");
@@ -318,8 +350,26 @@ document.getElementById("noBtn").addEventListener("touchstart",()=>{
 });
 
 function yes(){
-    explode("❤️");
-    setTimeout(()=>next(5),1200);
+    // Grand explosion
+    const s4 = document.getElementById("s4");
+    for(let i=0;i<40;i++){
+        let e=document.createElement("div");
+        e.className="explosion";
+        e.innerHTML=(i%2===0?"❤️":"✨");
+        e.style.left = Math.random()*window.innerWidth+"px";
+        e.style.top = Math.random()*window.innerHeight+"px";
+        e.style.setProperty('--x', (Math.random()*400-200)+"px");
+        e.style.setProperty('--y', (Math.random()*400-200)+"px");
+        e.style.fontSize=(20+Math.random()*30)+"px";
+        document.body.appendChild(e);
+        setTimeout(()=>e.remove(),2000);
+    }
+    
+    // Show big heart after a delay
+    const bh = document.getElementById("bigHeart");
+    bh.style.opacity = 1;
+    
+    setTimeout(()=>next(5),2200);
 }
 </script>
 
