@@ -19,6 +19,14 @@ body {
 
 h1 { font-size: 2.8rem; margin-top: 35vh; }
 
+input {
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    border: none;
+    margin-top: 20px;
+}
+
 button {
     padding: 15px 35px;
     font-size: 1.1rem;
@@ -168,10 +176,19 @@ button {
 
 <body>
 
+<!-- Screen 0: Password -->
+<div class="screen active" id="s0">
+    <h1>qual è la cosa che preferisco al mondo? 💌</h1>
+    <input type="text" id="pwdInput" placeholder="Rispondi qui" autofocus>
+    <button onclick="checkPwd()">Enter</button>
+</div>
+
 <!-- Screen 1 -->
-<div class="screen active" id="s1">
+<div class="screen" id="s1">
     <h1>Buon San Valentino, baby ❤️</h1>
     <button onclick="start()">Continue 💌</button>
+    <div class="cupid">👶🏹❤️</div>
+    <div class="cupid">👶🏹❤️</div>
     <div class="cupid">👶🏹❤️</div>
 </div>
 
@@ -262,8 +279,19 @@ setInterval(()=>{
     setTimeout(()=>h.remove(),6000);
 },500);
 
+// Password check
+function checkPwd(){
+    const input = document.getElementById("pwdInput").value.trim();
+    if(input.toLowerCase() === "azhagi"){
+        document.getElementById('s0').classList.remove('active');
+        next(1);
+        music.play().catch(()=>{});
+    } else {
+        alert("Incorrect! Try again 💔");
+    }
+}
+
 function start(){
-    music.play().catch(()=>{});
     next(2);
 }
 
@@ -322,6 +350,9 @@ document.getElementById("noBtn").addEventListener("touchstart",()=>{
 });
 
 function yes(){
+    // Show photo8.jpg popup first
+    note("<img src='photo8.jpg' style='width:100%;border-radius:15px;'>");
+
     // Super magical grand explosion
     const symbols=["❤️","✨","💖","💘","💫"];
     for(let i=0;i<60;i++){
@@ -339,8 +370,6 @@ function yes(){
     // Big heart fade in
     const bh = document.getElementById("bigHeart");
     bh.style.opacity = 1;
-    // Show popup with photo8.jpg
-    note("<img src='photo8.jpg' style='width:90%; border-radius:15px;'>");
     setTimeout(()=>next(5),2500);
 }
 </script>
