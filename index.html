@@ -143,7 +143,7 @@ button {
     100% { transform: translate(var(--x), var(--y)) scale(1.5); opacity: 0; }
 }
 
-/* Final big heart */
+/* Final big heart will appear only on YES click */
 #bigHeart {
     position: fixed;
     font-size: 100px;
@@ -243,7 +243,7 @@ button {
     <button onclick="closePop()">Close</button>
 </div>
 
-<div id="bigHeart">❤️</div>
+<div id="bigHeart"></div> <!-- will only appear on YES click -->
 
 <audio id="music" src="Poove.mp3" loop></audio>
 
@@ -251,8 +251,9 @@ button {
 const music = document.getElementById("music");
 let noCount = 0;
 
-// Hearts everywhere
+// Hearts everywhere (skip on screen 1)
 setInterval(()=>{
+    if(document.getElementById("s1").classList.contains("active")) return;
     let h=document.createElement("div");
     h.className="heart";
     h.innerHTML="❤️";
